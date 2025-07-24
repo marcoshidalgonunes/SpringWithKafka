@@ -1,2 +1,2 @@
-# PocAccountTransactions
-Studies for Proof of Concept to process high volume of bank account transactions
+# BffUsingKafka
+Example of Backend to Frontend (BFF) communicating with a backend worker via Kafka.
