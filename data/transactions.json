@@ -1,0 +1,182 @@
+[
+  {
+    "transactionId": 1,
+    "account": {
+      "entity": "0033",
+      "branch": "0017",
+      "number": "000010391312"
+    },
+    "origin": {
+      "entity": "0033",
+      "branch": "0017",
+      "userId": "JX4C0011",
+      "cashier": "N",
+      "terminal": "JXBE0411",
+      "channel": "99"
+    },
+    "type": "CPV",
+    "code": "0358",
+    "amount": 26.50,
+    "timestamp": "2025-07-17T19:34:13.687570000000",
+    "accountingDate": "2025-07-17",
+    "historyComplement": "JULHO / 2025",
+    "controls": {
+      "operationType": "A",
+      "isRealOperation": true,
+      "transactionOrigin": "5",
+      "observationType": "C",
+      "provisionalType": "P"
+    },
+    "nio": {
+      "application": "JX",
+      "terminal": "0400",
+      "date": "2025-07-17",
+      "time": "05235416"
+    },
+    "status": "PROCESS"
+  },
+  {
+    "transactionId": 2,
+    "account": {
+      "entity": "0033",
+      "branch": "0017",
+      "number": "000010391312"
+    },
+    "origin": {
+      "entity": "0033",
+      "branch": "0017",
+      "userId": "JX4C0012",
+      "cashier": "N",
+      "terminal": "JXBE0412",
+      "channel": "99"
+    },
+    "type": "CPV",
+    "code": "0359",
+    "amount": 15.75,
+    "timestamp": "2025-07-17T19:35:20.123456000000",
+    "accountingDate": "2025-07-17",
+    "historyComplement": "JULHO / 2025",
+    "controls": {
+      "operationType": "A",
+      "isRealOperation": true,
+      "transactionOrigin": "5",
+      "observationType": "C",
+      "provisionalType": null
+    },
+    "nio": {
+      "application": "JX",
+      "terminal": null,
+      "date": null,
+      "time": null
+    },
+    "status": null
+  },
+  {
+    "transactionId": 3,
+    "account": {
+      "entity": "0033",
+      "branch": "0017",
+      "number": "000010391312"
+    },
+    "origin": {
+      "entity": "0033",
+      "branch": "0017",
+      "userId": "JX4C0012",
+      "cashier": "N",
+      "terminal": "JXBE0412",
+      "channel": "99"
+    },
+    "type": "CPV",
+    "code": "0360",
+    "amount": -45.30,
+    "timestamp": "2025-07-17T19:35:20.223456000000",
+    "accountingDate": "2025-07-17",
+    "historyComplement": "JULHO / 2025",
+    "controls": {
+      "operationType": "A",
+      "isRealOperation": true,
+      "transactionOrigin": "5",
+      "observationType": "C",
+      "provisionalType": "P"
+    },
+    "nio": {
+      "application": "JX",
+      "terminal": "0400",
+      "date": "2025-07-17",
+      "time": "05235416"
+    },
+    "status": "PROCESS"
+  },
+  {
+    "transactionId": 4,
+    "account": {
+      "entity": "0033",
+      "branch": "0017",
+      "number": "000010391312"
+    },
+    "origin": {
+      "entity": "0033",
+      "branch": "0017",
+      "userId": "JX4C0012",
+      "cashier": "N",
+      "terminal": "JXBE0412",
+      "channel": "99"
+    },
+    "type": "CPV",
+    "code": "0361",
+    "amount": 78.95,
+    "timestamp": "2025-07-17T19:35:20.323456000000",
+    "accountingDate": "2025-07-17",
+    "historyComplement": "JULHO / 2025",
+    "controls": {
+      "operationType": "A",
+      "isRealOperation": true,
+      "transactionOrigin": "5",
+      "observationType": "C",
+      "provisionalType": "P"
+    },
+    "nio": {
+      "application": "JX",
+      "terminal": "0400",
+      "date": "2025-07-17",
+      "time": "05235416"
+    },
+    "status": "PROCESS"
+  },
+  {
+    "transactionId": 5,
+    "account": {
+      "entity": "0033",
+      "branch": "0017",
+      "number": "000010391312"
+    },
+    "origin": {
+      "entity": "0033",
+      "branch": "0017",
+      "userId": "JX4C0012",
+      "cashier": "N",
+      "terminal": "JXBE0412",
+      "channel": "99"
+    },
+    "type": "CPV",
+    "code": "0362",
+    "amount": -12.50,
+    "timestamp": "2025-07-17T19:35:20.423456000000",
+    "accountingDate": "2025-07-17",
+    "historyComplement": "JULHO / 2025",
+    "controls": {
+      "operationType": "A",
+      "isRealOperation": true,
+      "transactionOrigin": "5",
+      "observationType": "C",
+      "provisionalType": "P"
+    },
+    "nio": {
+      "application": "JX",
+      "terminal": "0400",
+      "date": "2025-07-17",
+      "time": "05235416"
+    },
+    "status": "PROCESS"
+  }
+]

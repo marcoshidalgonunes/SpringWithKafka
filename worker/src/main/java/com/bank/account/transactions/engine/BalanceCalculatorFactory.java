@@ -1,0 +1,39 @@
+package com.bank.account.transactions.engine;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import com.bank.account.transactions.engine.impl.BalanceBlocked;
+import com.bank.account.transactions.engine.impl.BalanceCalculator;
+import com.bank.account.transactions.model.Balance;
+import com.bank.account.transactions.repository.BalanceRepository;
+
+@Component
+public class BalanceCalculatorFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(BalanceCalculatorFactory.class);
+
+    private final BalanceRepository balanceRepository;
+
+    public BalanceCalculatorFactory(BalanceRepository balanceRepository) {
+        this.balanceRepository = balanceRepository;
+    }
+
+    public IBalanceCalculator create(String accountId) {
+        Balance balance = null;
+        try {
+            balance = balanceRepository.getBalance(accountId);
+        } catch (Exception e) {
+            // Log the error and treat as error status
+            log.error("Error retrieving balance for accountId={}", accountId, e);
+            return new BalanceBlocked("ERROR", accountId);
+        }
+        if (balance == null || balance.getBlocked()) {
+            String status = (balance == null) ? "ERROR" : "BLOCKED";
+            return new BalanceBlocked(status, accountId);
+        }
+
+        return new BalanceCalculator(balanceRepository, accountId, balance.getAmount());
+    }
+}

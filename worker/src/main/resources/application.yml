@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: transaction-worker
+    batch-interval: 1000
+  profiles:
+    active: local
+    
+kafka:
+  producer-topic: transaction-processed
+  consumer-topic: transaction-received  
+  consumer-groupid: received-group
+  dead-letter-topic: transaction-received-dlt
