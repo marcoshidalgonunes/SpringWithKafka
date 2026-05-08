@@ -3,6 +3,9 @@ spring:
     name: transactions-bff
   profiles:
     active: local
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
 
 logging:
   level:
