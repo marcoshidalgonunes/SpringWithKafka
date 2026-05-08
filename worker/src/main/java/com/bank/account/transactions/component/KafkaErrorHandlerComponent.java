@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 @Component
 public class KafkaErrorHandlerComponent {
@@ -15,12 +18,12 @@ public class KafkaErrorHandlerComponent {
 
     private final KafkaTemplate<String, Object> kafkaTemplateObject;
 
-    private final String deadLetterTopic;
+    private final @NonNull String deadLetterTopic;
 
     public KafkaErrorHandlerComponent(KafkaTemplate<String, Object> kafkaTemplateObject,
                                       @Value("${kafka.dead-letter-topic}") String deadLetterTopic) {
         this.kafkaTemplateObject = kafkaTemplateObject;
-        this.deadLetterTopic = deadLetterTopic;
+        this.deadLetterTopic = Objects.requireNonNull(deadLetterTopic, "deadLetterTopic must not be null");
     }
 
     @Bean

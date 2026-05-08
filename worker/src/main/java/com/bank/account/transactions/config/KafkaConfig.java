@@ -17,30 +17,35 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.retrytopic.RetryTopicConfiguration;
 import org.springframework.kafka.retrytopic.RetryTopicConfigurationBuilder;
-import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.springframework.lang.NonNull;
 
 import com.bank.account.transactions.model.Transaction;
 import com.bank.account.transactions.util.ObjectMapperFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Configuration
 public class KafkaConfig {
 
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;
+    private final @NonNull String bootstrapServers;
+    private final @NonNull String producerTopic;
+    private final @NonNull String consumerTopic;
 
-    @Value("${kafka.producer-topic}")
-    private String producerTopic;
-
-    @Value("${kafka.consumer-topic}")
-    private String consumerTopic;
+    public KafkaConfig(
+            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
+            @Value("${kafka.producer-topic}") String producerTopic,
+            @Value("${kafka.consumer-topic}") String consumerTopic) {
+        this.bootstrapServers = Objects.requireNonNull(bootstrapServers, "bootstrapServers must not be null");
+        this.producerTopic = Objects.requireNonNull(producerTopic, "producerTopic must not be null");
+        this.consumerTopic = Objects.requireNonNull(consumerTopic, "consumerTopic must not be null");
+    }
 
     @Bean
-    ProducerFactory<String, Transaction> transactionProducerFactory(
-            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
+    ProducerFactory<String, Transaction> transactionProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -55,12 +60,11 @@ public class KafkaConfig {
 
     @Bean
     KafkaTemplate<String, Transaction> transactionKafkaTemplate(ProducerFactory<String, Transaction> transactionProducerFactory) {
-        return new KafkaTemplate<>(transactionProducerFactory);
+        return new KafkaTemplate<>(Objects.requireNonNull(transactionProducerFactory, "transactionProducerFactory must not be null"));
     }
 
     @Bean
-    ProducerFactory<String, Object> objectProducerFactory(
-            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
+    ProducerFactory<String, Object> objectProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -80,12 +84,11 @@ public class KafkaConfig {
 
     @Bean
     KafkaTemplate<String, Object> kafkaTemplateObject(ProducerFactory<String, Object> objectProducerFactory) {
-        return new KafkaTemplate<>(objectProducerFactory);
+        return new KafkaTemplate<>(Objects.requireNonNull(objectProducerFactory, "objectProducerFactory must not be null"));
     }
-    
+
     @Bean
-    ConsumerFactory<String, Transaction> transactionConsumerFactory(
-            @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
+    ConsumerFactory<String, Transaction> transactionConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -103,7 +106,7 @@ public class KafkaConfig {
             ConsumerFactory<String, Transaction> transactionConsumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, Transaction> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(transactionConsumerFactory);
+        factory.setConsumerFactory(Objects.requireNonNull(transactionConsumerFactory, "transactionConsumerFactory must not be null"));
         return factory;
     }
 
@@ -113,7 +116,7 @@ public class KafkaConfig {
             .newInstance()
             .maxAttempts(3)
             .fixedBackOff(2000)
-            .create(kafkaTemplate);
+            .create(Objects.requireNonNull(kafkaTemplate, "kafkaTemplate must not be null"));
     }
 
     @Bean
@@ -130,5 +133,5 @@ public class KafkaConfig {
                 .partitions(1)
                 .replicas(1)
                 .build();
-    }    
+    }
 }

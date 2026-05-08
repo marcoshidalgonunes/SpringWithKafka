@@ -50,7 +50,7 @@ public class TransactionService {
     }
 
     @Retryable(
-        value = { KafkaException.class },
+        retryFor = { KafkaException.class },
         maxAttempts = 3,
         backoff = @Backoff(delay = 2000)
     )
@@ -103,12 +103,24 @@ public class TransactionService {
 
     @KafkaListener(topics = "${kafka.consumer-topic}", groupId = "${kafka.consumer-groupid}")
     public void listenReply(ConsumerRecord<String, Transaction> record) {
-        log.info("Consumed Transaction from Kafka: {}", record.value());
+        try {
+            log.info("Consumed Transaction from Kafka: {}", record.value());
 
-        String correlationId = new String(record.headers().lastHeader("correlationId").value());
-        CompletableFuture<Transaction> future = futures.remove(correlationId);
-        if (future != null) {
-            future.complete(record.value());
+            org.apache.kafka.common.header.Header correlationHeader = record.headers().lastHeader("correlationId");
+            if (correlationHeader == null) {
+                log.warn("Received reply without correlationId header, ignoring");
+                return;
+            }
+
+            String correlationId = new String(correlationHeader.value());
+            CompletableFuture<Transaction> future = futures.remove(correlationId);
+            if (future != null) {
+                future.complete(record.value());
+            } else {
+                log.warn("No pending future found for correlationId: {}", correlationId);
+            }
+        } catch (Exception e) {
+            log.error("Error processing Kafka reply, message will not be retried", e);
         }
     }
 }
