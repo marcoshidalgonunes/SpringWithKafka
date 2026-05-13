@@ -41,10 +41,6 @@ public class BalanceCalculator implements IBalanceCalculator {
     @Override
     public void update() {
         log.info("Updating balance for account Id '{}' to {}", accountId, balance);
-        try {
-            balanceRepository.updateBalance(accountId, balance);
-        } catch (Exception e) {
-            log.error("Error updating balance for account Id {}: {}", accountId, e.getMessage(), e);
-        }
+        balanceRepository.updateBalance(accountId, balance);
     }
 }

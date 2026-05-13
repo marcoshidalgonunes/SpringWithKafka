@@ -21,17 +21,17 @@ public class BalanceCalculatorFactory {
     }
 
     public IBalanceCalculator create(String accountId) {
-        Balance balance = null;
-        try {
-            balance = balanceRepository.getBalance(accountId);
-        } catch (Exception e) {
-            // Log the error and treat as error status
-            log.error("Error retrieving balance for accountId={}", accountId, e);
+        log.info("Retrieving balance for account Id '{}'", accountId);
+        
+        Balance balance = balanceRepository.getBalance(accountId);
+        if (balance == null) {
             return new BalanceBlocked("ERROR", accountId);
         }
-        if (balance == null || balance.getBlocked()) {
-            String status = (balance == null) ? "ERROR" : "BLOCKED";
-            return new BalanceBlocked(status, accountId);
+        if (balance.getAmount() == null) {
+            return new BalanceBlocked("NOT FOUND", accountId);
+        }
+        if (balance.getBlocked()) {
+            return new BalanceBlocked("BLOCKED", accountId);
         }
 
         return new BalanceCalculator(balanceRepository, accountId, balance.getAmount());
