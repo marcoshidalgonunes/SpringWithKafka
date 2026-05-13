@@ -2,6 +2,9 @@ spring:
   application:
     name: transaction-worker
     batch-interval: 1000
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
   profiles:
     active: local
     
