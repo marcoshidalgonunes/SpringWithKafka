@@ -27,10 +27,10 @@ public class BalanceCalculatorFactory {
         if (balance == null) {
             return new BalanceBlocked("ERROR", accountId);
         }
-        if (balance.getAmount() == null) {
-            return new BalanceBlocked("NOT FOUND", accountId);
+        else if (balance.getAmount() == null) {
+            return new BalanceBlocked("INVALID", accountId);
         }
-        if (balance.getBlocked()) {
+        else if (balance.getBlocked()) {
             return new BalanceBlocked("BLOCKED", accountId);
         }
 
