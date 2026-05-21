@@ -135,7 +135,7 @@ public class KafkaConfig {
             .newInstance()
             .maxAttempts(3)
             .fixedBackOff(2000)
-            .includeTopics(java.util.List.of(producerTopic)) // only retry on the request topic, not the reply topic
+            .includeTopics(Objects.requireNonNull(java.util.Collections.singletonList(producerTopic), "topics must not be null")) // only retry on the request topic, not the reply topic
             .create(Objects.requireNonNull(kafkaTemplate, "kafkaTemplate must not be null"));
     }
 
