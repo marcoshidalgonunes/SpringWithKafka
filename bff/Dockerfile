@@ -9,6 +9,6 @@ RUN apk update && apk upgrade --no-cache
 RUN apk add --no-cache curl
 COPY --from=build /app/target/*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8081
 ENV JAVA_TOOL_OPTIONS="-Dspring.profiles.active=docker"
 ENTRYPOINT ["java", "-jar", "app.jar"]

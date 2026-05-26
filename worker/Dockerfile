@@ -6,6 +6,7 @@ RUN apk update && apk upgrade --no-cache && mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN apk update && apk upgrade --no-cache
+RUN apk add --no-cache curl
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8082
