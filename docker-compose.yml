@@ -83,7 +83,9 @@ services:
       context: ./worker/.
       dockerfile: Dockerfile
     depends_on:         
-      postgres:
+      kafka:
+        condition: service_healthy
+      backend:
         condition: service_healthy         
     networks:
       - lan-network
@@ -91,6 +93,25 @@ services:
       - 8082:8082
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    container_name: backend 
+    image: ${DOCKER_REGISTRY-}transactions-backend
+    build:
+      context: ./backend/.
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy 
+    networks:
+      - lan-network
+    ports:
+      - 8083:8083
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5

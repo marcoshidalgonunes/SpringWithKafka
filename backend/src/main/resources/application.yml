@@ -1,17 +1,15 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: poctransactions-processor
+    name: transactions-balance
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
   profiles:
     active: local
-    
-kafka:
-  producer-topic: transaction-processed
-  consumer-topic: transaction-received  
-  consumer-groupid: received-group
-  dead-letter-topic: transaction-received-dlt
+
 
 
   

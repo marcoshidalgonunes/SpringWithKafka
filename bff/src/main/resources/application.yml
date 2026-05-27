@@ -10,27 +10,6 @@ spring:
     consumer:
       auto-offset-reset: earliest
 
-logging:
-  level:
-    org:
-      springframework:
-        http:
-          converter:
-            json: DEBUG
-        kafka:
-          support:
-            converter: DEBUG
-          listener: DEBUG
-        web: DEBUG
-      apache:
-        kafka:
-          clients:
-            consumer: DEBUG
-    com:
-      fasterxml:
-        jackson:
-          databind: DEBUG
-
 kafka:
   producer-topic: transaction-received
   consumer-topic: transaction-processed

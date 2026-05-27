@@ -1,6 +1,4 @@
 spring:
   datasource:
     url: jdbc:postgresql://postgres:5432/bank_accounts
-    driver-class-name: org.postgresql.Driver
-  kafka:
-    bootstrap-servers: kafka:29092
+

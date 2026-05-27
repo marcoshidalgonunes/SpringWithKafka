@@ -1,11 +1,11 @@
 package com.bank.account.transactions.repository;
 
+import com.bank.account.transactions.model.Balance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -22,23 +22,46 @@ public class BalanceRepository {
         this.dataSource = dataSource;
     }
 
-    public String processTransaction(int accountId, int transactionId, BigDecimal amount) {
-        String result = "ERROR";
-        String sql = "{ ? = call process_transaction(?, ?, ?) }";
+    public Balance getBalance(String accountId) {
+        String sql = "call get_balance(?, ?, ?)";
+        try (Connection conn = dataSource.getConnection();
+            CallableStatement stmt = conn.prepareCall(sql)) {
+
+            stmt.setString(1, accountId);
+            stmt.registerOutParameter(2, Types.NUMERIC);
+            stmt.registerOutParameter(3, Types.BOOLEAN);
+
+            stmt.execute();
+
+            BigDecimal amount = stmt.getBigDecimal(2);
+            boolean blocked = stmt.getBoolean(3);
+
+            if(amount == null) {
+                log.warn("Balance not found for accountId={}", accountId);
+                return null;
+            }
+
+            return new Balance(accountId, amount, blocked);
+        } catch (Exception e) {
+            log.error("Error calling get_balance for accountId={}", accountId, e);
+            return null;
+        }
+    }
+
+    public Boolean updateBalance(String accountId, BigDecimal newAmount) {
+        String sql = "call update_balance(?, ?)";
         try (Connection conn = dataSource.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
-            stmt.registerOutParameter(1, Types.VARCHAR);
-            stmt.setInt(2, accountId);
-            stmt.setInt(3, transactionId);
-            stmt.setBigDecimal(4, amount);
+            stmt.setString(1, accountId);
+            stmt.setBigDecimal(2, newAmount);
 
             stmt.execute();
-            result = stmt.getString(1);
 
+            return true;
         } catch (Exception e) {
-            log.error("Error calling process_transaction", e);
+            log.error("Error calling update_balance for accountId={}", accountId, e);
+            return false;
         }
-        return result;
     }
 }
