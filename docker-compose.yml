@@ -64,8 +64,6 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
-      worker:
-        condition: service_healthy  
     networks:
       - lan-network
     ports:
@@ -82,20 +80,13 @@ services:
     build:
       context: ./worker/.
       dockerfile: Dockerfile
-    depends_on:         
-      kafka:
-        condition: service_healthy
+    depends_on:
+      bff:
+        condition: service_healthy          
       backend:
         condition: service_healthy         
     networks:
       - lan-network
-    ports:
-      - 8082:8082
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   backend:
     container_name: backend 
