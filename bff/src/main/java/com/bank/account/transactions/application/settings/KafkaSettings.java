@@ -1,4 +1,4 @@
-package com.bank.account.transactions.config;
+package com.bank.account.transactions.application.settings;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -22,8 +22,8 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.lang.NonNull;
 
-import com.bank.account.transactions.model.Transaction;
-import com.bank.account.transactions.util.ObjectMapperFactory;
+import com.bank.account.transactions.domain.model.Transaction;
+import com.bank.account.transactions.infrastructure.util.ObjectMapperFactory;
 
 import reactor.kafka.receiver.ReceiverOptions;
 
@@ -32,13 +32,13 @@ import java.util.Map;
 import java.util.Objects;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaSettings {
 
     private final @NonNull String bootstrapServers;
     private final @NonNull String producerTopic;
     private final @NonNull String consumerTopic;
 
-    public KafkaConfig(
+    public KafkaSettings(
             @Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
             @Value("${kafka.producer-topic}") String producerTopic,
             @Value("${kafka.consumer-topic}") String consumerTopic) {

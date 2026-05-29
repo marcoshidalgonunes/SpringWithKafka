@@ -1,4 +1,4 @@
-package com.bank.account.transactions.service;
+package com.bank.account.transactions.infrastructure.messages;
 
 import java.util.Map;
 import java.util.UUID;
@@ -20,15 +20,14 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-import com.bank.account.transactions.model.Transaction;
-
+import com.bank.account.transactions.domain.model.Transaction;
 
 @Service
-public class TransactionService {
+public class TransactionMessaging {
 
     private final KafkaTemplate<String, Transaction> kafkaTemplate;
 
-    private static final Logger log = LoggerFactory.getLogger(TransactionService.class);
+    private static final Logger log = LoggerFactory.getLogger(TransactionMessaging.class);
     
     private final Map<String, CompletableFuture<Transaction>> futures = new ConcurrentHashMap<>();
 
@@ -38,7 +37,7 @@ public class TransactionService {
 
     private final int timeout;
 
-    public TransactionService(
+    public TransactionMessaging(
             KafkaTemplate<String, Transaction> kafkaTemplate,
             @Value("${kafka.producer-topic}") String producerTopic,
             @Value("${kafka.consumer-topic}") String consumerTopic,

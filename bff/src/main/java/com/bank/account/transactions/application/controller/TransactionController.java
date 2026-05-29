@@ -1,4 +1,4 @@
-package com.bank.account.transactions.controller;
+package com.bank.account.transactions.application.controller;
 
 import java.util.concurrent.TimeoutException;
 
@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bank.account.transactions.model.Transaction;
-import com.bank.account.transactions.service.TransactionService;
+import com.bank.account.transactions.domain.model.Transaction;
+import com.bank.account.transactions.infrastructure.messages.TransactionMessaging;
 
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
 
-    private final TransactionService transactionService;
+    private final TransactionMessaging transactionService;
 
-    public TransactionController(TransactionService transactionService) {
+    public TransactionController(TransactionMessaging transactionService) {
         this.transactionService = transactionService;
     }
 

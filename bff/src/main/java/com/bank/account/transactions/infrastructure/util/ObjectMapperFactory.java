@@ -1,4 +1,4 @@
-package com.bank.account.transactions.util;
+package com.bank.account.transactions.infrastructure.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

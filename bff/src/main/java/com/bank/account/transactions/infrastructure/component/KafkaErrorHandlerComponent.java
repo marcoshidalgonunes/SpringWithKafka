@@ -1,4 +1,4 @@
-package com.bank.account.transactions.component;
+package com.bank.account.transactions.infrastructure.component;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Value;

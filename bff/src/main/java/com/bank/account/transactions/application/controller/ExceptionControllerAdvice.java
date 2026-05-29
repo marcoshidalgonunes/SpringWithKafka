@@ -1,4 +1,4 @@
-package com.bank.account.transactions.controller;
+package com.bank.account.transactions.application.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

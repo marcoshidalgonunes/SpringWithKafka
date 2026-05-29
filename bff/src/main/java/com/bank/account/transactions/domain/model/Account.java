@@ -1,4 +1,4 @@
-package com.bank.account.transactions.model;
+package com.bank.account.transactions.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
