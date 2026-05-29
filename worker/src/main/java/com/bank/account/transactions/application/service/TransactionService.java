@@ -1,4 +1,4 @@
-package com.bank.account.transactions.service;
+package com.bank.account.transactions.application.service;
 
 import java.time.Instant;
 import java.time.Duration;
@@ -16,9 +16,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.bank.account.transactions.engine.BalanceCalculatorFactory;
-import com.bank.account.transactions.engine.IBalanceCalculator;
-import com.bank.account.transactions.model.Transaction;
+import com.bank.account.transactions.application.engine.BalanceCalculatorFactory;
+import com.bank.account.transactions.application.engine.IBalanceCalculator;
+import com.bank.account.transactions.domain.model.Transaction;
 
 @Service
 public class TransactionService {

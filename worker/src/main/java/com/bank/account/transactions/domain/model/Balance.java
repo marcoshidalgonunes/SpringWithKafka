@@ -1,4 +1,4 @@
-package com.bank.account.transactions.model;
+package com.bank.account.transactions.domain.model;
 
 import java.math.BigDecimal;
 

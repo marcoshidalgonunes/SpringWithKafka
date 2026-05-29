@@ -1,4 +1,4 @@
-package com.bank.account.transactions.engine;
+package com.bank.account.transactions.application.engine;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
-package com.bank.account.transactions.config;
+package com.bank.account.transactions.infrastructure.config;
 
-import com.bank.account.transactions.util.ObjectMapperFactory;
+import com.bank.account.transactions.infrastructure.util.ObjectMapperFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

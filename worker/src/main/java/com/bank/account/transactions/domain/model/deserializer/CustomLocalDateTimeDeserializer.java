@@ -1,4 +1,4 @@
-package com.bank.account.transactions.model.deserializer;
+package com.bank.account.transactions.domain.model.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

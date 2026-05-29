@@ -1,13 +1,13 @@
-package com.bank.account.transactions.engine;
+package com.bank.account.transactions.application.engine;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.bank.account.transactions.client.BalanceClient;
-import com.bank.account.transactions.engine.impl.BalanceBlocked;
-import com.bank.account.transactions.engine.impl.BalanceCalculator;
-import com.bank.account.transactions.model.Balance;
+import com.bank.account.transactions.application.engine.impl.BalanceBlocked;
+import com.bank.account.transactions.application.engine.impl.BalanceCalculator;
+import com.bank.account.transactions.domain.model.Balance;
+import com.bank.account.transactions.infrastructure.client.BalanceClient;
 
 @Component
 public class BalanceCalculatorFactory {

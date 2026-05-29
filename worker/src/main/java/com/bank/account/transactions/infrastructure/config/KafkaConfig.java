@@ -1,4 +1,4 @@
-package com.bank.account.transactions.config;
+package com.bank.account.transactions.infrastructure.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -21,8 +21,8 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.lang.NonNull;
 
-import com.bank.account.transactions.model.Transaction;
-import com.bank.account.transactions.util.ObjectMapperFactory;
+import com.bank.account.transactions.domain.model.Transaction;
+import com.bank.account.transactions.infrastructure.util.ObjectMapperFactory;
 
 import java.util.HashMap;
 import java.util.Map;

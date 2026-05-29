@@ -1,12 +1,12 @@
-package com.bank.account.transactions.engine.impl;
+package com.bank.account.transactions.application.engine.impl;
 
 import java.math.BigDecimal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bank.account.transactions.engine.IBalanceCalculator;
-import com.bank.account.transactions.client.BalanceClient;
+import com.bank.account.transactions.application.engine.IBalanceCalculator;
+import com.bank.account.transactions.infrastructure.client.BalanceClient;
 
 public class BalanceCalculator implements IBalanceCalculator {
 

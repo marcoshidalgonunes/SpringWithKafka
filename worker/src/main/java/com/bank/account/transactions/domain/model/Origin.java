@@ -1,4 +1,4 @@
-package com.bank.account.transactions.model;
+package com.bank.account.transactions.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -10,8 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Cancellation {
-    Integer transactionNumber;
+public class Origin {
+    String entity;
 
-    String type = "N";
+    String branch;
+
+    String userId;
+
+    String cashier;
+
+    String terminal;
+
+    String channel;
+
+    Boolean isAccounting = false;
 }
