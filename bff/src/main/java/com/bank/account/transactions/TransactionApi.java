@@ -6,10 +6,10 @@ import org.springframework.retry.annotation.EnableRetry;
 
 @EnableRetry
 @SpringBootApplication
-public class TransactionsApi {
+public class TransactionApi {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TransactionsApi.class, args);
+		SpringApplication.run(TransactionApi.class, args);
 	}
 
 }

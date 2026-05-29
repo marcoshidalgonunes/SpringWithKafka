@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableFeignClients
-public class TransactionsExecutor {
+public class TransactionWorker {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TransactionsExecutor.class, args);
+		SpringApplication.run(TransactionWorker.class, args);
 	}
 
 }

@@ -16,7 +16,7 @@ This is a **Spring Boot** Web API responsible for **account balance operations**
 
 ```
 src/main/java/com/bank/account/transactions/
-├── TransactionsBackend.java          # Application entry point
+├── BalanceApi.java          # Application entry point
 ├── application/
 │   ├── controller/                   # REST controllers
 │   └── service/                      # Business logic

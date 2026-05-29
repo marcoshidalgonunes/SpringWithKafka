@@ -17,7 +17,7 @@ This is a **Spring Boot** worker responsible for **processing bank account trans
 
 ```
 src/main/java/com/bank/account/transactions/
-├── TransactionsExecutor.java              # Application entry point
+├── TransactionWorker.java              # Application entry point
 ├── application/
 │   ├── engine/                            # Balance calculation strategy
 │   │   ├── IBalanceCalculator.java        # Calculator interface

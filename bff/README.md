@@ -17,7 +17,7 @@ This is a **Spring Boot** BFF (Backend for Frontend) API responsible for **recei
 
 ```
 src/main/java/com/bank/account/transactions/
-├── TransactionsApi.java                      # Application entry point
+├── TransactionApi.java                      # Application entry point
 ├── application/
 │   ├── controller/                           # REST controllers
 │   └── settings/                             # Kafka configuration settings
