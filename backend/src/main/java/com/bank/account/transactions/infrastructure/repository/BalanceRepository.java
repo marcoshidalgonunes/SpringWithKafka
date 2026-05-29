@@ -1,9 +1,10 @@
-package com.bank.account.transactions.repository;
+package com.bank.account.transactions.infrastructure.repository;
 
-import com.bank.account.transactions.model.Balance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+
+import com.bank.account.transactions.domain.model.Balance;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;

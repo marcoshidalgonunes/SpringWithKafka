@@ -1,4 +1,4 @@
-package com.bank.account.transactions.controller;
+package com.bank.account.transactions.application.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bank.account.transactions.model.Balance;
-import com.bank.account.transactions.service.BalanceService;
+import com.bank.account.transactions.application.service.BalanceService;
+import com.bank.account.transactions.domain.model.Balance;
 
 import java.math.BigDecimal;
 

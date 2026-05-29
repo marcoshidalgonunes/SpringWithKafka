@@ -1,7 +1,7 @@
-package com.bank.account.transactions.service;
+package com.bank.account.transactions.application.service;
 
-import com.bank.account.transactions.model.Balance;
-import com.bank.account.transactions.repository.BalanceRepository;
+import com.bank.account.transactions.domain.model.Balance;
+import com.bank.account.transactions.infrastructure.repository.BalanceRepository;
 
 import org.springframework.stereotype.Service;
 
