@@ -11,7 +11,7 @@
 	<groupId>com.bank.account.transactions</groupId>
 	<artifactId>transactions-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transactions-backend</name>
+	<name>balances-api</name>
 	<description>Back-end worker to process bank account transactions</description>
 	<url/>
 	<licenses>

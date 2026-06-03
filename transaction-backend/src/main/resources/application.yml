@@ -1,9 +1,9 @@
 server:
-  port: 8083
+  port: 8084
 
 spring:
   application:
-    name: balances-backend
+    name: transactions-backend
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres

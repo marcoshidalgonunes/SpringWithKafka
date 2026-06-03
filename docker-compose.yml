@@ -90,7 +90,7 @@ services:
 
   backend:
     container_name: backend 
-    image: ${DOCKER_REGISTRY-}transactions-backend
+    image: ${DOCKER_REGISTRY-}balances-backend
     build:
       context: ./backend/.
       dockerfile: Dockerfile
@@ -103,6 +103,25 @@ services:
       - 8083:8083
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  transaction-backend:
+    container_name: transaction-backend 
+    image: ${DOCKER_REGISTRY-}transactions-backend
+    build:
+      context: ./transaction-backend/.
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy 
+    networks:
+      - lan-network
+    ports:
+      - 8084:8084
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5

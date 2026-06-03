@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bank.account.transactions</groupId>
-	<artifactId>transactions-api</artifactId>
+	<artifactId>transactions-bff</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>transactions-bff</name>
 	<description>BFF to ingest bank account transactions</description>
