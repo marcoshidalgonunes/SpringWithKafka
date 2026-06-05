@@ -10,6 +10,9 @@ spring:
   profiles:
     active: local
 
-
+kafka:
+  consumer-topic: transaction-processed
+  consumer-groupid: transaction-backend-grpid
+  dead-letter-topic: transaction-processed-dlt
 
   

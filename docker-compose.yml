@@ -84,7 +84,10 @@ services:
       bff:
         condition: service_healthy          
       backend:
-        condition: service_healthy         
+        condition: service_healthy
+      transaction-backend:
+        condition: service_healthy
+          
     networks:
       - lan-network
 
@@ -114,6 +117,8 @@ services:
       context: ./transaction-backend/.
       dockerfile: Dockerfile
     depends_on:
+      kafka:
+        condition: service_healthy    
       postgres:
         condition: service_healthy 
     networks:

@@ -13,6 +13,6 @@ spring:
 kafka:
   producer-topic: transaction-received
   consumer-topic: transaction-processed
-  consumer-groupid: processed-group
+  consumer-groupid: transaction-bff-grpid
   dead-letter-topic: transaction-processed-dlt
   timeout: 10000
