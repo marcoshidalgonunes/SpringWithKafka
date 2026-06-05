@@ -1,5 +1,6 @@
 package com.bank.account.transactions.application.service;
 
+import com.bank.account.transactions.domain.model.Account;
 import com.bank.account.transactions.domain.model.Transaction;
 import com.bank.account.transactions.infrastructure.repository.TransactionRepository;
 
@@ -17,7 +18,14 @@ public class TransactionService {
     }
 
     public Transaction getTransaction(String accountId, Integer transactionId) {
-        return transactionRepository.getTransaction(accountId, transactionId);
+        Account account = new Account();
+        account.setBranch(accountId.substring(0, 4));
+        account.setNumber(accountId.substring(4));
+
+        Transaction transaction = transactionRepository.getTransaction(accountId, transactionId);
+        transaction.setAccount(account);
+        
+        return transaction;
     }
 
     public Boolean createTransaction(String accountId, Integer transactionId, BigDecimal amount, String status) {
