@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a **Spring Boot** Web API responsible for **account balance operations**. It exposes REST endpoints to manage balances, persisting data in a **PostgreSQL** database
+This is a **Spring Boot** Web API responsible for **transaction operations**. It exposes REST endpoints to manage transactions, persisting data in **PostgreSQL** database. Besides that, it consumes transaction messages from a Kafka topic, saving transactions processed to update balances in database.
 
 ## Tech Stack
 
@@ -16,14 +16,17 @@ This is a **Spring Boot** Web API responsible for **account balance operations**
 
 ```
 src/main/java/com/bank/account/transactions/
-├── BalanceApi.java          # Application entry point
+├── TransactionBackend.java          # Application entry point
 ├── application/
+│   ├── consumer/                     # Kafka consumers
 │   ├── controller/                   # REST controllers
 │   └── service/                      # Business logic
 ├── domain/
 │   └── model/                        # Domain models
 └── infrastructure/
-    └── repository/                   # Data access layer
+    |── config/                       # Configuration wrappers    
+    |── repository/                   # Data access layer
+    └── util/                         # Utility classes    
 ```
 
 ## Prerequisites
@@ -71,10 +74,10 @@ docker run -p 8083:8083 transactions-backend
 
 ## API Endpoints
 
-| Method | Path                        | Description              |
-|--------|-----------------------------|--------------------------|
-| GET    | `/api/balance/{accountId}`  | Get balance by account   |
-| PUT    | `/api/balance/{accountId}`  | Update balance by account|
+| Method | Path                                             | Description                        |
+|--------|--------------------------------------------------|------------------------------------|
+| GET    | `/api/transactions/{accountId}/{transactionId}`  | Get transaction by account and id  |
+| POST   | `/api/transactions                               | Create transaction                 |
 
 ## Tests
 
