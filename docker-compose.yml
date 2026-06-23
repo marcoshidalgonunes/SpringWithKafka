@@ -95,7 +95,7 @@ services:
     container_name: backend 
     image: ${DOCKER_REGISTRY-}balances-backend
     build:
-      context: ./backend/.
+      context: ./balance-backend/.
       dockerfile: Dockerfile
     depends_on:
       postgres:
