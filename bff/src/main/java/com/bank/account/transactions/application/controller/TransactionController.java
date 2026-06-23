@@ -24,11 +24,11 @@ public class TransactionController {
     @PostMapping("/process")
     public ResponseEntity<Transaction> process(@RequestBody Transaction payload) throws Exception {
         try {
-            Transaction result = transactionService.sendAndReceive(payload);
-            if (result == null) {
+            Transaction transaction = transactionService.sendAndReceive(payload);
+            if (transaction == null) {
                 return ResponseEntity.status(500).build();
             }
-            return ResponseEntity.ok(result);
+            return ResponseEntity.ok().body(transaction);
         } catch (TimeoutException e) {
             // Timeout occurred after retries
             return ResponseEntity.status(504).build();
