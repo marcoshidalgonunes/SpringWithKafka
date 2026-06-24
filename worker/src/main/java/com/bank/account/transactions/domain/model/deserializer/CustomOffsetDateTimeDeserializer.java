@@ -5,13 +5,13 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CustomLocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
+public class CustomOffsetDateTimeDeserializer extends JsonDeserializer<OffsetDateTime> {
     
     @Override
-    public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String timestamp = p.getText();
         
         // Handle excess nanosecond digits by truncating to 9 digits
@@ -22,6 +22,6 @@ public class CustomLocalDateTimeDeserializer extends JsonDeserializer<LocalDateT
             }
         }
         
-        return LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return OffsetDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 }

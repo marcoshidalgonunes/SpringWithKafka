@@ -59,7 +59,7 @@ public class TransactionService {
         prepare(transaction);
 
         transactionsCounter++;
-        final String status = balanceCalculator.execute(transaction.getTransactionId(), transaction.getAmount());
+        final String status = balanceCalculator.execute(transaction.getTransactionId(), transaction.getEntry().getAmount());
         transaction.setStatus(status);
 
         // Send updated transaction to Kafka
@@ -113,7 +113,7 @@ public class TransactionService {
     private void prepare(Transaction transaction) {
         synchronized (updateLock) {
             if (transactionsCounter == 0) {
-                balanceCalculator = balanceCalculatorFactory.create(transaction.getAccount().toString());
+                balanceCalculator = balanceCalculatorFactory.create(transaction.getEntry().getAccount().toString());
                 startBatchTimestamp = Instant.now();
             }
         }

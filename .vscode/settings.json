@@ -2,6 +2,6 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.project.sourcePaths": [
-        "processor/src/main/java"
+        "transaction-backend"
     ]
 }

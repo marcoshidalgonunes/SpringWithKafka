@@ -1,6 +1,7 @@
 package com.bank.account.transactions.application.engine.impl;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class BalanceBlocked implements IBalanceCalculator {
     }
 
     @Override
-    public String execute(int transactionId, BigDecimal transactionValue) {
+    public String execute(UUID transactionId, BigDecimal transactionValue) {
         log.warn("Transaction Id '{}' was not used for calculation", transactionId);
         return status;
     }

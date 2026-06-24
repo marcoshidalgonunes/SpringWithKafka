@@ -20,6 +20,7 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
+import com.bank.account.transactions.domain.model.Entry;
 import com.bank.account.transactions.domain.model.Transaction;
 
 @Service
@@ -53,15 +54,20 @@ public class TransactionMessaging {
         maxAttempts = 3,
         backoff = @Backoff(delay = 2000)
     )
-    public Transaction sendAndReceive(Transaction payload) throws Exception, TimeoutException {
-        log.info("Producing Transaction to Kafka: {}", payload);
+    public Transaction sendAndReceive(Entry entry) throws Exception, TimeoutException {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionId(UUID.randomUUID());
+        transaction.setEntry(entry);
+        transaction.setStatus("PROCESS");
+
+        log.info("Producing Transaction to Kafka: {}", entry);
 
         String correlationId = UUID.randomUUID().toString();
         CompletableFuture<Transaction> future = new CompletableFuture<>();
         // You will need to change the futures map to Map<String, CompletableFuture<Transaction>>
         futures.put(correlationId, future);
 
-        ProducerRecord<String, Transaction> record = new ProducerRecord<>(producerTopic, correlationId, payload);
+        ProducerRecord<String, Transaction> record = new ProducerRecord<>(producerTopic, correlationId, transaction);
         record.headers().add("correlationId", correlationId.getBytes());
         record.headers().add("consumerTopic", consumerTopic.getBytes());
 

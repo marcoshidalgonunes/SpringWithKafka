@@ -24,7 +24,7 @@ public class TransactionConsumer {
 
 		log.info("Consumed payload from Kafka: {}", transaction); // Log consumer payload
 
-        Boolean success = transactionService.createTransaction(transaction.getAccount().toString(), transaction.getTransactionId(), transaction.getAmount(), transaction.getStatus());
+        Boolean success = transactionService.createTransaction(transaction);
         if (!success) {
             log.error("Failed to process transaction: {}", transaction);
         }

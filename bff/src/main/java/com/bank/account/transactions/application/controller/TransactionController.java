@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bank.account.transactions.domain.model.Entry;
 import com.bank.account.transactions.domain.model.Transaction;
 import com.bank.account.transactions.infrastructure.messages.TransactionMessaging;
 
@@ -22,7 +23,7 @@ public class TransactionController {
     }
 
     @PostMapping("/process")
-    public ResponseEntity<Transaction> process(@RequestBody Transaction payload) throws Exception {
+    public ResponseEntity<Transaction> process(@RequestBody Entry payload) throws Exception {
         try {
             Transaction transaction = transactionService.sendAndReceive(payload);
             if (transaction == null) {

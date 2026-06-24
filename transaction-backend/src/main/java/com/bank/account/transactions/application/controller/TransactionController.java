@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.account.transactions.application.service.TransactionService;
 import com.bank.account.transactions.domain.model.Transaction;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -21,18 +23,21 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/{accountId}/{transactionId}")
-    public ResponseEntity<Transaction> getTransaction(@PathVariable String accountId, @PathVariable Integer transactionId) {
-        Transaction transaction = transactionService.getTransaction(accountId, transactionId);
-        if (transaction == null) {
+    @GetMapping("/{accountId}/{date}")
+    public ResponseEntity<List<Transaction>> getTransaction(@PathVariable String accountId, @PathVariable String date) {
+        List<Transaction> transactions = transactionService.getTransactionsByDate(accountId, date);
+        if (transactions == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        else if (transactions.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(transaction);
+        return ResponseEntity.ok(transactions);
     }
 
     @PostMapping()
-    public ResponseEntity<Void> createTransaction( @RequestBody Transaction transaction) {
-        Boolean success = transactionService.createTransaction(transaction.getAccount().toString(), transaction.getTransactionId(), transaction.getAmount(), transaction.getStatus());
+    public ResponseEntity<Void> createTransaction(@RequestBody Transaction transaction) {
+        Boolean success = transactionService.createTransaction(transaction);
         if (success) {
             return ResponseEntity.ok().build();
         } else {

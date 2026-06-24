@@ -1,6 +1,7 @@
 package com.bank.account.transactions.application.engine.impl;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ public class BalanceCalculator implements IBalanceCalculator {
     }
 
     @Override
-    public String execute(int transactionId, BigDecimal transactionValue) {
+    public String execute(UUID transactionId, BigDecimal transactionValue) {
         final BigDecimal updatedBalance = balance.add(transactionValue);
         if (updatedBalance.compareTo(BigDecimal.ZERO) < 0) {
             log.warn("Transaction Id '{}' resulted in negative balance: {}", transactionId, updatedBalance);
