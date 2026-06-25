@@ -51,11 +51,13 @@ public class TransactionRepository {
                     String code = rs.getString("code");
                     String description = rs.getString("description");
                     String status = rs.getString("status");
+                    OffsetDateTime createdTimestamp = rs.getObject("createdTimestamp", OffsetDateTime.class);
 
                     Entry entry = new Entry();
                     entry.setAmount(amount);
                     entry.setCode(code);
                     entry.setDescription(description);
+                    entry.setCreatedTimestamp(createdTimestamp);
 
                     results.add(new Transaction(
                         transactionId,
