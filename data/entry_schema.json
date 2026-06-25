@@ -1,0 +1,39 @@
+{
+  "account": {
+    "branch": {
+      "description": "Branch code where account was opened",
+      "type": "string",
+      "maxLength": 4,
+      "required": true
+    },
+    "number": {
+      "description": "Account number",
+      "type": "string",
+      "maxLength": 12,
+      "required": true
+    }
+  },
+  "code": {
+    "description": "Transaction operation code",
+    "type": "string",
+    "maxLength": 4,
+    "required": true
+  },
+  "description": {
+    "description": "Transaction description",
+    "type": "string",
+    "maxLength": 40,
+    "required": true
+  },
+  "amount": {
+    "description": "Transaction amount (positive for credit, negative for debit)",
+    "type": "number",
+    "required": true
+  },
+  "createdTimestamp": {
+    "description": "Transaction date and time with timezone",
+    "type": "string",
+    "format": "date-time",
+    "required": true
+  }
+}

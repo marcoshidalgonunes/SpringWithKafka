@@ -1,307 +1,53 @@
 {
-  "account": {
-    "entity": {
-      "description": "Entity code",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    },
-    "branch": {
-      "description": "Branch code where account was opened",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    },
-    "number": {
-      "description": "Account number",
-      "type": "string",
-      "maxLength": 12,
-      "required": true
-    },
-    "currency": {
-      "description": "Account currency code",
-      "type": "string",
-      "maxLength": 3,
-      "required": true
-    },
-    "subAccount": {
-      "description": "Sub-account for the transaction",
-      "type": "string",
-      "maxLength": 3,
-      "required": false
-    }
-  },
-  "origin": {
-    "entity": {
-      "description": "Origin entity code",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    },
-    "branch": {
-      "description": "Origin branch code",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    },
-    "userId": {
-      "description": "Origin user ID",
-      "type": "string",
-      "maxLength": 8,
-      "required": true
-    },
-    "cashier": {
-      "description": "Cashier type (A=Cashier, B=Teleprocessing, C=Internal teleprocessing, N=None)",
-      "type": "string",
-      "enum": ["A", "B", "C", "N"],
-      "required": true
-    },
-    "terminal": {
-      "description": "Origin terminal ID",
-      "type": "string",
-      "maxLength": 8,
-      "required": true
-    },
-    "channel": {
-      "description": "Channel code",
-      "type": "string",
-      "maxLength": 2,
-      "required": true
-    },
-    "isAccounting": {
-      "description": "Flag indicating if transaction should be accounted",
-      "type": "boolean",
-      "required": false,
-      "default": false
-    }
-  },
-  "type": {
-    "description": "Transaction type (CRD=Credit, DBT=Debit, CPV=Provisional credit)",
+  "transactionId": {
+    "description": "Transaction ID",
     "type": "string",
-    "enum": ["CRD", "DBT", "CPV"],
+    "maxLength": 36,
     "required": true
   },
-  "code": {
-    "description": "Transaction operation code",
+  "entry": {
+	  "account": {
+		"branch": {
+		  "description": "Branch code where account was opened",
+		  "type": "string",
+		  "maxLength": 4,
+		  "required": true
+		},
+		"number": {
+		  "description": "Account number",
+		  "type": "string",
+		  "maxLength": 12,
+		  "required": true
+		}
+	  },
+	  "code": {
+		"description": "Transaction operation code",
+		"type": "string",
+		"maxLength": 4,
+		"required": true
+	  },
+	  "description": {
+		"description": "Transaction description",
+		"type": "string",
+		"maxLength": 40,
+		"required": true
+	  },
+	  "amount": {
+		"description": "Transaction amount (positive for credit, negative for debit)",
+		"type": "number",
+		"required": true
+	  },
+	  "createdTimestamp": {
+		"description": "Transaction date and time with timezone",
+		"type": "string",
+		"format": "date-time",
+		"required": true
+	  }	  
+  },
+  "status": {
+    "description": "Transaction status",
     "type": "string",
-    "maxLength": 4,
+    "maxLength": 10,
     "required": true
-  },
-  "amount": {
-    "description": "Transaction amount (positive for credit, negative for debit)",
-    "type": "number",
-    "required": true
-  },
-  "concept": {
-    "description": "Transaction concept for fees, taxes or interest",
-    "type": "string",
-    "maxLength": 4,
-    "required": false
-  },
-  "timestamp": {
-    "description": "Transaction date and time (YYYY-MM-DDTHH:MM:SS)",
-    "type": "string",
-    "format": "date-time",
-    "required": true
-  },
-  "accountingDate": {
-    "description": "Accounting date (YYYY-MM-DD)",
-    "type": "string",
-    "format": "date",
-    "required": true
-  },
-  "checkNumber": {
-    "description": "Check number (0 if no check)",
-    "type": "string",
-    "maxLength": 9,
-    "required": false
-  },
-  "internalReference": {
-    "description": "Internal reference for transaction identification",
-    "type": "string",
-    "maxLength": 15,
-    "required": false
-  },
-  "observation": {
-    "description": "Transaction observations",
-    "type": "string",
-    "maxLength": 65,
-    "required": false
-  },
-  "historyComplement": {
-    "description": "Complementary history text",
-    "type": "string",
-    "maxLength": 25,
-    "required": false
-  },
-  "tax": {
-    "code": {
-      "description": "Tax operation code",
-      "type": "string",
-      "maxLength": 4,
-      "required": false
-    },
-    "amount": {
-      "description": "Tax amount",
-      "type": "number",
-      "required": false
-    },
-    "concept": {
-      "description": "Tax concept",
-      "type": "string",
-      "maxLength": 4,
-      "required": false
-    }
-  },
-  "controls": {
-    "operationType": {
-      "description": "Indicator of operation type (A=Automatic, B=Auto+Digitized, F=Offline, G=Offline+Digitized, M=Manual, N=Manual+Digitized)",
-      "type": "string",
-      "enum": ["A", "B", "F", "G", "M", "N"],
-      "required": true
-    },
-    "isRealOperation": {
-      "description": "Indicates if operation is real (true) or simulation (false)",
-      "type": "boolean",
-      "required": true
-    },
-    "validationLevel": {
-      "description": "Error validation indicator (T=Total, P=Partial)",
-      "type": "string",
-      "enum": ["T", "P"],
-      "required": false
-    },
-    "transactionOrigin": {
-      "description": "Origin of the operation (1=Teller, 2=Domiciliations, 3=ATM, 4=Purchase, 5=Other, 6=Loans, 7=Currency operation, 8=Batch currency, 9=Unpaid module)",
-      "type": "string",
-      "enum": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
-      "required": true
-    },
-    "observationType": {
-      "description": "Observation type (C=Operation code, O=Observation, T=All)",
-      "type": "string",
-      "enum": ["C", "O", "T"],
-      "required": true
-    },
-    "isPrincipal": {
-      "description": "Indicates if the transaction is the principal one",
-      "type": "boolean",
-      "default": true,
-      "required": false
-    },
-    "isDebitToAvailable": {
-      "description": "Debit up to available balance indicator",
-      "type": "boolean",
-      "required": false
-    },
-    "shouldUseLimit": {
-      "description": "Use limit in available balance calculation",
-      "type": "boolean",
-      "default": true,
-      "required": false
-    },
-    "timeDelay": {
-      "description": "Credit timing delay indicator (S=Yes, N=No, Empty=Check parameters)",
-      "type": "string",
-      "enum": ["S", "N", ""],
-      "required": false,
-      "default": ""
-    },
-    "isEscrowAccount": {
-      "description": "Escrow account indicator",
-      "type": "boolean",
-      "required": false,
-      "default": false
-    },
-    "provisionalType": {
-      "description": "Provisional transaction type",
-      "type": "string",
-      "enum": ["", "D", "N", "P", "C", "O"],
-      "required": false,
-      "default": ""
-    }
-  },
-  "cancellation": {
-    "transactionNumber": {
-      "description": "Transaction number to cancel",
-      "type": "integer",
-      "required": false
-    },
-    "type": {
-      "description": "Cancellation type (S=Same day, C=Correction, N=Not cancellation)",
-      "type": "string",
-      "enum": ["S", "C", "N"],
-      "required": false,
-      "default": "N"
-    }
-  },
-  "retention": {
-    "indicator": {
-      "description": "Retention indicator (00=No retention, 01=Create retention, 02-13=Other retention operations)",
-      "type": "string",
-      "maxLength": 2,
-      "required": false,
-      "default": "00"
-    },
-    "number": {
-      "description": "Retention number",
-      "type": "string",
-      "maxLength": 6,
-      "required": false
-    },
-    "code": {
-      "description": "Retention code",
-      "type": "string",
-      "maxLength": 4,
-      "required": false
-    },
-    "amount": {
-      "description": "Retention amount",
-      "type": "number",
-      "required": false
-    },
-    "validDays": {
-      "description": "Retention validity days",
-      "type": "integer",
-      "required": false
-    },
-    "expirationDate": {
-      "description": "Retention expiration date (YYYY-MM-DD)",
-      "type": "string",
-      "format": "date",
-      "required": false
-    },
-    "affectsLiquidation": {
-      "description": "Indicates if retention affects liquidation",
-      "type": "boolean",
-      "required": false,
-      "default": false
-    }
-  },
-  "nio": {
-    "application": {
-      "description": "Application code",
-      "type": "string",
-      "maxLength": 2,
-      "required": true
-    },
-    "terminal": {
-      "description": "NIO terminal",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    },
-    "date": {
-      "description": "NIO date (YYYY-MM-DD)",
-      "type": "string",
-      "format": "date",
-      "required": true
-    },
-    "time": {
-      "description": "NIO time (HHMM)",
-      "type": "string",
-      "maxLength": 4,
-      "required": true
-    }
   }
 }
