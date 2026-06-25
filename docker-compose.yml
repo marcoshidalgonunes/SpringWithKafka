@@ -83,7 +83,7 @@ services:
     depends_on:
       bff:
         condition: service_healthy          
-      backend:
+      balance-backend:
         condition: service_healthy
       transaction-backend:
         condition: service_healthy
@@ -91,8 +91,8 @@ services:
     networks:
       - lan-network
 
-  backend:
-    container_name: backend 
+  balance-backend:
+    container_name: balance-backend 
     image: ${DOCKER_REGISTRY-}balances-backend
     build:
       context: ./balance-backend/.

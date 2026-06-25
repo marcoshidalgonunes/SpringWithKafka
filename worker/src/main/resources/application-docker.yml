@@ -5,4 +5,4 @@ spring:
 feign:
   client:
     balance:
-      url: http://backend:8083/api/balance
+      url: http://balance-backend:8083/api/balance
